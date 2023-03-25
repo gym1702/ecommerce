@@ -91,7 +91,7 @@
                     <h6 class="title">Precios </h6>
                 </a>
             </header>
-            <div class="filter-content collapse show" id="collapse_3" style="">
+            <div class="filter-content collapse show" id="collapse_3">
                 <div class="card-body">
                     
                     <div class="form-row">
@@ -147,18 +147,25 @@
         <div class="col-md-4">
             <figure class="card card-product-grid">
                 <div class="img-wrap">                         
-                    <a href="{% url 'productos_app:producto_detalle' %}" class="img-wrap"> <img src="{{ prod.imagen.url }}"> </a>                        
+                    <a href="{{ prod.get_url }}" class="img-wrap"> <img src="{{ prod.imagen.url }}"> </a>                        
                 </div>
 
                 <figcaption class="info-wrap">
                     <div class="fix-height">
-                        <a href="./product-detail.html" class="title">{{ prod.nombre }}</a>
+                        <a href="{{ prod.get_url }}" class="title">{{ prod.nombre }}</a>
                         <div class="price-wrap mt-2">
                             <span class="price">${{ prod.precio }}</span>
                             <!-- <del class="price-old">$1980</del> -->
                         </div>
                     </div>
-                    <a href="#" class="btn btn-block btn-success">Agregar al carrito </a>
+
+                    {% if prod.stock <= 0 %}
+                        <span class="btn btn-block btn-secondary">Producto sin stock</span> 
+                    {% else %}
+                        <a href="./product-detail.html" class="btn btn-block btn-primary"><span class="text">Agregar al carrito</span> <i class="fas fa-shopping-cart"></i>  </a>
+                    {% endif %}
+                    
+                    <!-- <a href="#" class="btn btn-block btn-success">Agregar al carrito </a> -->
                 </figcaption>
             </figure>
         </div> 

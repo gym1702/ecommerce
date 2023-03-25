@@ -72,13 +72,18 @@
                   </label>
                 </div> 
             </div>
-        </div> <!-- row.// -->
+        </div>
         <hr>
-        <a href="./product-detail.html" class="btn  btn-primary"> <span class="text">Agregar al shopping cart</span> <i class="fas fa-shopping-cart"></i>  </a>
-    </article> <!-- product-info-aside .// -->
-            </main> <!-- col.// -->
-        </div> <!-- row.// -->
-    </div> <!-- card.// -->
+        {% if producto_unico.stock <= 0 %}
+            <span class="btn btn-secondary">Producto sin stock</span> 
+        {% else %}
+            <a href="./product-detail.html" class="btn  btn-primary"> <span class="text">Agregar al carrito</span> <i class="fas fa-shopping-cart"></i>  </a>
+        {% endif %}
+
+        </article>
+            </main>
+        </div>
+    </div>
     <!-- ============================ COMPONENT 1 END .// ================================= -->
     
     <br>
