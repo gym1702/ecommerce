@@ -32,7 +32,7 @@
                 <div class="col-lg-2 col-md-3 col-6">
                     <a href="{% url 'home_app:home' %}" class="brand-wrap">
                         <img class="logo" src="{% static 'images/logo01.png' %}">
-                    </a> <!-- brand-wrap.// -->
+                    </a>
                 </div>
                 <div class="col-lg col-sm col-md col-6 flex-grow-0">
                     <div class="category-wrap dropdown d-inline-block float-right">
@@ -43,7 +43,6 @@
 
                             <!-- viene del context_procesor de categrias para mostrar todas las categorias -->
                             <a class="dropdown-item" href="{% url 'productos_app:productos' %}">Todas </a>
-                            <br>
 
                             <!-- viene del context_procesor de categrias para mostrar categoria seleccionada -->
                             {% for categoria in links %}
@@ -51,13 +50,16 @@
                             {% endfor %}    
 
                         </div>
-                    </div> <!-- category-wrap.// -->
-                </div> <!-- col.// -->
+                    </div>
+                </div>
+
                 <a href="{% url 'productos_app:productos' %}" class="btn btn-outline-primary">Tienda</a>
+
+                <!-- BUSQUEDA -->
                 <div class="col-lg  col-md-6 col-sm-12 col">
-                    <form action="#" class="search">
+                    <form action="{% url 'productos_app:busqueda' %}" class="search">
                         <div class="input-group w-100">
-                            <input type="text" class="form-control" style="width:60%;" placeholder="Search">
+                            <input type="text" class="form-control" style="width:60%;" placeholder="Buscar producto" name="keyword">
 
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="submit">
@@ -65,29 +67,34 @@
                                 </button>
                             </div>
                         </div>
-                    </form> <!-- search-wrap .end// -->
-                </div> <!-- col.// -->
+                    </form>
+                </div>
+
                 <div class="col-lg-3 col-sm-6 col-8 order-2 order-lg-3">
                     <div class="d-flex justify-content-end mb-3 mb-lg-0">
                         <div class="widget-header">
+                            {% if user.is_authenticated %}
+                            <small class="title text-muted">Bienvenido {{account.first_name}}</small>
+                            {% else %}
                             <small class="title text-muted">Bienvenido visitante!</small>
+                            {% endif %}
                             <div>
                                 <a href="./signin.html">Login</a> <span class="dark-transp"> | </span>
                                 <a href="./register.html"> Registrar</a>
                             </div>
                         </div>
-                        <a href="./cart.html" class="widget-header pl-3 ml-3">
+                        <a href="{% url 'carrito_app:carrito' %}" class="widget-header pl-3 ml-3">
                             <div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i>
                             </div>
-                            <span class="badge badge-pill badge-danger notify">0</span>
+                            <span class="badge badge-pill badge-danger notify">{{ cart_count }}</span>
                         </a>
-                    </div> <!-- widgets-wrap.// -->
-                </div> <!-- col.// -->
-            </div> <!-- row.// -->
-        </div> <!-- container.// -->
-    </section> <!-- header-main .// -->
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </section>
 
 
 
 
-</header> <!-- section-header.// -->
+</header>

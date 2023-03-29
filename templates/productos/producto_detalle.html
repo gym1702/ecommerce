@@ -59,16 +59,16 @@
                 <h6>Talla</h6>
                 <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
                   <label class="btn btn-light">
-                    <input type="radio" name="radio_color"> S
+                    <input type="radio" name="radio_color"> CH
                   </label>
                   <label class="btn btn-light active">
                     <input type="radio" name="radio_color" checked> M
                   </label>
                   <label class="btn btn-light">
-                    <input type="radio" name="radio_color"> L
+                    <input type="radio" name="radio_color"> G
                   </label>
                   <label class="btn btn-light">
-                    <input type="radio" name="radio_color"> XL
+                    <input type="radio" name="radio_color"> XG
                   </label>
                 </div> 
             </div>
@@ -77,7 +77,14 @@
         {% if producto_unico.stock <= 0 %}
             <span class="btn btn-secondary">Producto sin stock</span> 
         {% else %}
-            <a href="./product-detail.html" class="btn  btn-primary"> <span class="text">Agregar al carrito</span> <i class="fas fa-shopping-cart"></i>  </a>
+
+            {% if in_cart %}
+              <a href="" class="btn  btn-success"> <span class="text">Producto en el carrito</span> <i class="fas fa-check"></i></a>
+              <a href="{% url 'carrito_app:carrito' %}" class="btn  btn-outline-primary"> <span class="text">Ver carrito de compras</span> <i class="fas fa-eye"></i></a>
+            {% else %}
+              <a href="{% url 'carrito_app:agregar_carrito' producto_unico.id %}" class="btn  btn-primary"> <span class="text">Agregar al carrito</span> <i class="fas fa-shopping-cart"></i>  </a>
+            {% endif %}
+
         {% endif %}
 
         </article>

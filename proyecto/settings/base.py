@@ -56,7 +56,7 @@ LOCAL_APPS = [
     'applications.categorias',
     'applications.cuentas',
     'applications.productos',
-
+    'applications.carrito',
 ]
 
 THIRD_PARTY_APPS = [
@@ -90,8 +90,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                #declara el context_processors (se hace publico menu_links)
+                #declara el context_processors (se hace publico menu_links, counter)
                 'applications.categorias.context_processors.menu_links',
+                'applications.carrito.context_processors.counter',
             ],
         },
     },
