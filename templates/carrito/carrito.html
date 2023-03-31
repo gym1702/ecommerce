@@ -42,11 +42,12 @@
                                                     <a href="{{ cart_item.product.get_url }}" class="title text-dark">{{cart_item.product.nombre}}</a>
 
                                                     <p class="text-muted small">
-                                                        {% if cart_item.variantes.all %}
+                                                        {% if cart_item.variations.all %}
 
-                                                            {% for item in cart_item.variantes.all %}
+                                                            {% for item in cart_item.variations.all %}
 
-                                                                {{ item.variante_categoria | capfirst }} : {{ item.variante_valor | capfirst }} <br>
+                                                                {{ item.variante_categoria | capfirst }} : {{ item.variante_valor | capfirst }} 
+                                                                <br>
 
                                                             {% endfor %}
 
@@ -63,28 +64,28 @@
                                                 <div class="input-group input-spinner">
 
                                                     <div class="input-group-prepend">
-                                                        <a href="{% url 'carrito_app:eliminar_carrito' cart_item.product.id %}" class="btn btn-light" type="button" id="button-plus"><i class="fa fa-minus"></i> </a>
+                                                        <a href="{% url 'carrito_app:eliminar_carrito' cart_item.product.id cart_item.id %}" class="btn btn-light" type="button" id="button-minus"><i class="fa fa-minus"></i> </a>
                                                     </div>
 
                                                     <input type="text" class="form-control" value="{{cart_item.quantity}}">
 
                                                     <div class="input-group-append">
-                                                        <form action="{#% url 'add_carrito' cart_item.producto.id %#}" method="post">
+                                                        <form action="{% url 'carrito_app:agregar_carrito' cart_item.product.id %}" method="post">
                                                             {% csrf_token %}
 
-                                                            {% for item in cart_item.variantes.all %}
+                                                            {% for item in cart_item.variations.all %}
                                                                 <input type="hidden" name="{{ item.variante_categoria | lower }}" value="{{ item.variante_valor | capfirst }}">
                                                             {% endfor %}
 
-                                                            <a href="{% url 'carrito_app:agregar_carrito' cart_item.product.id %}" class="btn btn-light" type="submit" id="button-minus"> <i class="fa fa-plus"></i> </a>
+                                                            <button class="btn btn-light" type="submit" id="button-plus"> <i class="fa fa-plus"></i> </button>
                                                         </form>
-                                                    </div>
+                                                    </div>  
 
                                                 </div>
                                             </div>
                                         </td>
 
-                                         <!-- PRECIO DEL PRODUCTO -->
+                                        <!-- PRECIO DEL PRODUCTO -->
                                         <td>                                           
                                             <div class="price-wrap">
                                                 <var class="price">${{cart_item.subtotal  | floatformat:2 }}</var>
@@ -92,8 +93,9 @@
                                             </div>
                                         </td>
 
+                                        <!-- BOTON ELIMINAR -->
                                         <td class="text-right">
-                                            <a href="{% url 'carrito_app:eliminar_carrito_item' cart_item.product.id %}" class="btn btn-danger">
+                                            <a href="{% url 'carrito_app:eliminar_carrito_item' cart_item.product.id cart_item.id %}" class="btn btn-danger">
                                                  Eliminar
                                             </a>
                                         </td>

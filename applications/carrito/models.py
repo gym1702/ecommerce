@@ -1,6 +1,6 @@
 from django.db import models
 
-from applications.productos.models import Producto
+from applications.productos.models import Producto, Variante
 
 
 
@@ -13,13 +13,15 @@ class Cart(models.Model):
     
     class Meta:
         verbose_name_plural = 'Carritos'
+        
 
 
 class CartItem(models.Model):
-    product = models.ForeignKey(Producto, on_delete=models.CASCADE)
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
-    quantity = models.IntegerField()
-    is_active = models.BooleanField(default=True)
+    product = models.ForeignKey(Producto, on_delete=models.CASCADE, verbose_name='Producto')
+    variations = models.ManyToManyField(Variante, blank=True, verbose_name='Varientes')
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, verbose_name='Carrito')
+    quantity = models.IntegerField(verbose_name='Cantidad')
+    is_active = models.BooleanField(default=True, verbose_name='Esta activo')
 
     ##Para calcular precio total por producto en template
     def subtotal(self):

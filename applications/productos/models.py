@@ -17,16 +17,44 @@ class Producto(models.Model):
     fecha_edicion = models.DateTimeField('Fecha de edicion', auto_now =True)
     imagen = models.ImageField('Imagen', upload_to='fotos/productos')
 
-    class Meta:
-        verbose_name_plural = 'Productos'
-
 
     #utilizado para enviar ruta de detalle de producto
     def get_url(self):
         return reverse('productos_app:producto_detalle', args=[self.categoria.slug, self.slug])
         #Genera una url: http://localhost:8000/tienda/categoria_slug/slug
 
-
-
     def __str__(self):
         return self.nombre
+    
+    class Meta:
+        verbose_name_plural = 'Productos'
+    
+
+
+
+######## VARIANTES ##########
+
+class VarienteManager(models.Manager):
+    def colores(self):
+        return super(VarienteManager, self).filter(variante_categoria='color', activo=True) 
+    
+    def tallas(self):
+        return super(VarienteManager, self).filter(variante_categoria='talla', activo=True) 
+    
+variantes = (
+    ('color', 'color'),
+    ('talla', 'talla')
+)
+
+class Variante(models.Model):
+    
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    variante_categoria = models.CharField('Variantes', max_length=100, choices=variantes)
+    variante_valor = models.CharField(max_length=100)
+    activo = models.BooleanField(default=True)
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+
+    objects = VarienteManager()
+
+    def __str__(self):
+        return self.variante_categoria +' : '+ self.variante_valor

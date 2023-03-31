@@ -83,3 +83,5 @@ def search(request):
 
     return render(request, 'productos/productos.html', context)
 
+
+
