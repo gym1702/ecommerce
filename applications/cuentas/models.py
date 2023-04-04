@@ -42,7 +42,7 @@ class MyAccountManager(BaseUserManager):
 
 
 class Account(AbstractBaseUser):
-    #campos personalisados
+    #campos personalizados
     first_name = models.CharField('Nombres', max_length=50)
     last_name = models.CharField('Apellidos', max_length=50)
     username = models.CharField('Nombre de usuario', max_length=50, unique=True)    
@@ -73,6 +73,9 @@ class Account(AbstractBaseUser):
 
     def __str__(self):
         return self.email
+    
+    def full_name(self):
+        return self.first_name + ' ' + self.last_name
     
     #Otorga permisos de administrador
     def has_perm(self, perm, obj=None):

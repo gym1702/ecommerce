@@ -33,6 +33,12 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = (BASE_DIR / 'media')
 
 
+#PARA MENSAJERIA EN TEMPLATES
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS ={
+    messages.ERROR: 'danger'
+}
+
 
 #EMAIL SETTINGS
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

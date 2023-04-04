@@ -1,0 +1,60 @@
+
+{% extends 'home/base.html' %}
+
+
+{% block content %}
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-conten padding-y bg">
+
+    {% include 'home/includes/alertas.html' %}
+
+    <div class="container">
+        <div class="row">
+
+        {% include 'home/includes/dashboard_sidebar.html' %}
+
+        <main class="col-md-9">
+            <article class="card">
+            <header class="card-header">
+                <strong class="d-inline-block mr-3">Usuario:</strong>
+                <span>{{user.full_name}}</span>
+            </header>
+            <div class="card-body">
+                <div class="row">
+
+                  <div class="col-md-6">
+                    <div class="card" style="text-align:center;">
+                      <div class="card-body">
+                        <h5 class="card-title">Total de ordenes</h5>
+                        <h4>{{ contador_ordenes }}</h4>
+                        <a href="">Ver ordenes</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="card" style="text-align:center;">
+                      <div class="card-body">
+                        <img src="{{ perfilusuario.imagen.url }}" alt="Imagen de perfil" width="50" height="50" style="border-radius:50%">
+                        <p class="mb-0">{{ user.email }}</p>
+                        <p class="mb-0">{{ user.telefono }}</p>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                  </div>
+
+                </div>
+            </div>
+
+            </article>
+        </main>
+    </div>
+    </div>
+
+
+    </section>
+    <!-- ========================= SECTION CONTENT END// ========================= -->
+{% endblock content %}

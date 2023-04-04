@@ -27,7 +27,6 @@ class CartItem(models.Model):
     def subtotal(self):
         return self.product.precio * self.quantity
     
-    
 
     def __str__(self):
         return str(self.product)

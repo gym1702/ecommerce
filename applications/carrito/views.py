@@ -133,7 +133,7 @@ def cart(request, total=0, quantity=0, cart_items=None):
     #agrega los datos al template del carrito de compras
     try:
         cart = Cart.objects.get(cart_id = _cart_id(request))
-        cart_items =CartItem.objects.filter(cart = cart, is_active = True)
+        cart_items =CartItem.objects.filter(cart = cart, is_active = True).order_by('id')
 
         #para saber el precio total de los productos y cantidad de productos en carrito
         for cart_item in cart_items:

@@ -1,0 +1,10 @@
+
+{% autoescape off %}
+
+  Hola {{ user.first_name }},
+
+  Si solicitó restablecer su contraseña, de click al siguiente link:
+
+  http://{{ domain }}{% url 'cuentas_app:resetpassword_validate' uidb64=uid token=token %}
+
+{% endautoescape %}

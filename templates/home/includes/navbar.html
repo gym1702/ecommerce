@@ -73,21 +73,29 @@
                 <div class="col-lg-3 col-sm-6 col-8 order-2 order-lg-3">
                     <div class="d-flex justify-content-end mb-3 mb-lg-0">
                         <div class="widget-header">
-                            {% if user.is_authenticated %}
-                            <small class="title text-muted">Bienvenido {{account.first_name}}</small>
+
+                            {% if user.id is None %}
+                                <small class="title text-muted">Bienvenido visitante!</small>
+                                <div>
+                                    <a href="{% url 'cuentas_app:login' %}">Login</a> <span class="dark-transp"> | </span>
+                                    <a href="{% url 'cuentas_app:registro' %}"> Registrar</a>
+                                </div>                                
                             {% else %}
-                            <small class="title text-muted">Bienvenido visitante!</small>
+                                <small class="title text-muted">Bienvenido(a) {{user.first_name}}!</small>
+                                <div>
+                                    <a href="{% url 'cuentas_app:dashboard' %}">Dashboard</a> <span class="dark-transp"> | </span>
+                                    <a href="{% url 'cuentas_app:logout' %}"> Cerrar sesión</a>
+                                </div>
                             {% endif %}
-                            <div>
-                                <a href="./signin.html">Login</a> <span class="dark-transp"> | </span>
-                                <a href="./register.html"> Registrar</a>
-                            </div>
+                            
                         </div>
+
                         <a href="{% url 'carrito_app:carrito' %}" class="widget-header pl-3 ml-3">
                             <div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i>
                             </div>
                             <span class="badge badge-pill badge-danger notify">{{ cart_count }}</span>
                         </a>
+
                     </div>
                 </div>
             </div>
