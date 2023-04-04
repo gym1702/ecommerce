@@ -132,7 +132,7 @@
                             <p class="text-center mb-3">
                                 <img src="{% static './images/misc/payments.png' %}" height="26">
                             </p>
-                            <a href="{#% url 'checkout' %#}" class="btn btn-primary btn-block"> Pagar </a>
+                            <a href="{% url 'carrito_app:checkout' %}" class="btn btn-primary btn-block"> Pagar </a>
                             <a href="{% url 'productos_app:productos' %}" class="btn btn-outline-success btn-block">Continua comprando</a>
                         </div> 
                     </div>
@@ -141,11 +141,10 @@
 
 
             </div>
-            <!-- ============================ COMPONENT 1 END .// ================================= -->
+            
         {% endif %}
 
     </div>
 </section>
-<!-- ========================= SECTION CONTENT END// ========================= -->
 
 {% endblock content %}

@@ -8,8 +8,8 @@ class CartAdmin(admin.ModelAdmin):
 
 
 class CartItemAdmin(admin.ModelAdmin):
-    list_display = ('product', 'cart', 'quantity',)
-    search_fields = ['cart', 'product',]
+    list_display = ('product', 'cart', 'quantity', 'user',)
+    search_fields = ['cart', 'product', 'user',]
 
 
 admin.site.register(Cart, CartAdmin)
