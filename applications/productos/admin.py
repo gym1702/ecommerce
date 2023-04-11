@@ -1,11 +1,18 @@
 from django.contrib import admin
-from .models import Producto, Variante, ReviewRating
+import admin_thumbnails #(Para esta libreria inatalar django-admin-thumbnails)
+from .models import Producto, Variante, ReviewRating, ProductGallery
+
+
+@admin_thumbnails.thumbnail('image')
+class ProductGalleryInLine(admin.TabularInline):
+    model = ProductGallery
+    extra = 1
 
 
 class ProductoAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('nombre',)}
-
     list_display = ('nombre', 'precio', 'stock', 'categoria', 'fecha_edicion', 'disponible',)
+    inlines = [ProductGalleryInLine]
 
 
 class VarianteAdmin(admin.ModelAdmin):
@@ -20,6 +27,9 @@ class ReviewRatingAdmin(admin.ModelAdmin):
     list_filter = ('status',)
 
 
+
+
 admin.site.register(Producto, ProductoAdmin)
 admin.site.register(Variante, VarianteAdmin)
 admin.site.register(ReviewRating, ReviewRatingAdmin)
+admin.site.register(ProductGallery)

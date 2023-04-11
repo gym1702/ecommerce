@@ -18,5 +18,22 @@
 				<i class="fab fa-lg fa-cc-mastercard"></i>
 			</div>
 		</section>
-	</div><!-- //container -->
+	</div>
 </footer>
+
+<!-- LIBRERIA JQUERY -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+<script>
+	$(document).ready(function(){
+		$('.thumb a').click(function(e){
+			e.preventDefault();
+			$('.mainImage img').attr('src', $(this).attr('href'));
+			
+		})
+	})
+</script>
+
+
+</body>
+</html>

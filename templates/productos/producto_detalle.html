@@ -15,11 +15,25 @@
       <div class="row no-gutters">
         <aside class="col-md-6">
           <article class="gallery-wrap">
-            <div class="img-big-wrap">
-              <a href="#"><img src="{{ producto_unico.imagen.url }}"></a>
+            <div class="img-big-wrap mainImage">
+              <center>
+                <img src="{{ producto_unico.imagen.url }}">
+              </center>
             </div>
-
           </article>
+
+          <!-- GALERIA DE IMAGENES -->
+          <ul class="thumb">
+            <li>
+              <a href="{{ producto_unico.imagen.url }}" target="mainImagen"><img src="{{ producto_unico.imagen.url }}" alt="Imagen del producto"></a>
+              
+              {% for i in product_gallery %}
+                <a href="{{ i.image.url }}" target="mainImagen"><img src="{{ i.image.url }}" alt="Imagen del producto"></a>
+              {% endfor %}
+                
+            </li>
+          </ul>
+
         </aside>
         <main class="col-md-6 border-left">
 

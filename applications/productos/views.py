@@ -4,7 +4,7 @@ from django.db.models import Q
 from django.contrib import messages
 
 from applications.categorias.models import Categoria
-from applications.productos.models import Producto, ReviewRating
+from applications.productos.models import Producto, ReviewRating, ProductGallery
 from applications.carrito.models import CartItem
 from applications.carrito.views import _cart_id
 from .forms import ReviewForm
@@ -72,9 +72,11 @@ def producto_detalle(request, categoria_slug, producto_slug):
     else:
         orderproduct = None
 
-        
     #Mostrar comentarios del producto en el template
     reviews = ReviewRating.objects.filter(product_id=producto_unico.id, status=True)
+
+    #Mostrar la galeria de productos
+    product_gallery = ProductGallery.objects.filter(product_id=producto_unico.id)
     
 
     context = {
@@ -82,6 +84,7 @@ def producto_detalle(request, categoria_slug, producto_slug):
         'in_cart': in_cart,
         'orderproduct': orderproduct,
         'reviews': reviews,
+        'product_gallery': product_gallery
     }
 
     return render(request, 'productos/producto_detalle.html', context)

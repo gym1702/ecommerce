@@ -16,7 +16,7 @@
         <main class="col-md-9">
             <article class="card">
             <header class="card-header">
-                <strong class="d-inline-block mr-3"> Ordenes de compra </strong>
+                <strong class="d-inline-block mr-3"> Ordenes de compra realizadas </strong>
             </header>
             <div class="card-body">
                 <div class="row">
@@ -26,8 +26,9 @@
                               <thead>
                                 <tr>
                                   <th scope="col"># Orden</th>
-                                  <th scope="col">Nombre Facturacion</th>
+                                  <th scope="col">Nombre</th>
                                   <th scope="col">Telefono</th>
+                                  <th scope="col">Email</th>
                                   <th scope="col">Total Orden</th>
                                   <th scope="col">Fecha</th>
                                 </tr>
@@ -38,8 +39,9 @@
                                         <th scope="row">{{ order.order_number }}</th>
                                         <td>{{order.full_name}}</td>
                                         <td>{{order.phone}}</td>
+                                        <td>{{order.email}}</td>
                                         <td>${{order.order_total}}</td>
-                                        <td>{{order.created_at}}</td>
+                                        <td>{{order.created_at | date:"j-m-y" }}</td>
                                       </tr>
                                   {% endfor %}
                               </tbody>
