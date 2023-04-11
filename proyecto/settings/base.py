@@ -57,6 +57,7 @@ LOCAL_APPS = [
     'applications.cuentas',
     'applications.productos',
     'applications.carrito',
+    'applications.ordenes',
 ]
 
 THIRD_PARTY_APPS = [
@@ -75,7 +76,18 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #PAQUETE PARA CERRAR SESION POR INACTIVIDAD (INSTALAR django-session-timeout)
+    'django_session_timeout.middleware.SessionTimeoutMiddleware',
 ]
+
+
+
+#CIERRE DE SESION EN SEGUNDOS
+SESSION_EXPIRE_SECONDS = 1800
+SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
+SESSION_TIMEOUT_REDIRECT = 'cuentas_app:login' 
+
+
 
 ROOT_URLCONF = 'proyecto.urls'
 

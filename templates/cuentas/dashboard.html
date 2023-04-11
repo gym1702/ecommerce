@@ -3,7 +3,7 @@
 
 
 {% block content %}
-<!-- ========================= SECTION CONTENT ========================= -->
+
 <section class="section-conten padding-y bg">
 
     {% include 'home/includes/alertas.html' %}
@@ -17,7 +17,7 @@
             <article class="card">
             <header class="card-header">
                 <strong class="d-inline-block mr-3">Usuario:</strong>
-                <span>{{user.full_name}}</span>
+                <span>{{ user.full_name }}</span>
             </header>
             <div class="card-body">
                 <div class="row">
@@ -26,7 +26,7 @@
                     <div class="card" style="text-align:center;">
                       <div class="card-body">
                         <h5 class="card-title">Total de ordenes</h5>
-                        <h4>{{ contador_ordenes }}</h4>
+                        <h4>{{ orders_count }}</h4>
                         <a href="">Ver ordenes</a>
                       </div>
                     </div>
@@ -35,9 +35,10 @@
                   <div class="col-md-6">
                     <div class="card" style="text-align:center;">
                       <div class="card-body">
-                        <img src="{{ perfilusuario.imagen.url }}" alt="Imagen de perfil" width="50" height="50" style="border-radius:50%">
+                        
+                        <img src="{{ userprofile.profile_picture.url }}" alt="Imagen de perfil" width="70" height="70" style="border-radius:50%">
                         <p class="mb-0">{{ user.email }}</p>
-                        <p class="mb-0">{{ user.telefono }}</p>
+                        <p class="mb-0">Tel: {{ user.phone }}</p>
                       </div>
                     </div>
                   </div>

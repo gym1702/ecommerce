@@ -14,7 +14,7 @@
             <h3 class="text-center text-muted">El carrito de compras está vacio</h3>
             <br>
             <div class="text-center">
-                <a href="{% url 'productos_app:productos' %}" class="btn btn-primary">Continua comprando</a>
+                <a href="{% url 'productos_app:productos' %}" class="btn btn-primary">Ir de compras</a>
             </div>
 
         {% else %}
@@ -132,8 +132,8 @@
                             <p class="text-center mb-3">
                                 <img src="{% static './images/misc/payments.png' %}" height="26">
                             </p>
-                            <a href="{% url 'carrito_app:checkout' %}" class="btn btn-primary btn-block"> Pagar </a>
-                            <a href="{% url 'productos_app:productos' %}" class="btn btn-outline-success btn-block">Continua comprando</a>
+                            <a href="{% url 'carrito_app:checkout' %}" class="btn btn-primary btn-block"> Continuar </a>
+                            <a href="{% url 'productos_app:productos' %}" class="btn btn-outline-success btn-block">Seguir comprando</a>
                         </div> 
                     </div>
 

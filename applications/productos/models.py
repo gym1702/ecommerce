@@ -1,7 +1,9 @@
 from django.db import models
 from django.urls import reverse
+from django.db.models import Avg, Count
 
 from applications.categorias.models import Categoria
+from applications.cuentas.models import Account
 
 
 
@@ -25,6 +27,23 @@ class Producto(models.Model):
 
     def __str__(self):
         return self.nombre
+    
+
+    def promedioReview(self):
+        reviews = ReviewRating.objects.filter(product=self, status=True).aggregate(promedio=Avg('rating'))
+        avg = 0
+        if reviews['promedio'] is not None:
+            avg = float(reviews['promedio'])
+        return avg
+    
+
+    def contarReview(self):
+        reviews = ReviewRating.objects.filter(product=self, status=True).aggregate(contar=Count('id'))
+        contar = 0
+        if reviews['contar'] is not None:
+            contar = int(reviews['contar'])
+        return contar
+
     
     class Meta:
         verbose_name_plural = 'Productos'
@@ -58,3 +77,24 @@ class Variante(models.Model):
 
     def __str__(self):
         return self.variante_categoria +' : '+ self.variante_valor
+
+
+
+######## COMENTARIOS ##########
+
+class ReviewRating(models.Model):
+    product = models.ForeignKey(Producto, on_delete=models.CASCADE, verbose_name='Producto')
+    user = models.ForeignKey(Account, on_delete=models.CASCADE, verbose_name='Usuario')
+    subject = models.CharField(max_length=100, blank=True, verbose_name='Titulo')
+    review = models.CharField(max_length=500, blank=True, verbose_name='Comentario')
+    rating = models.FloatField(verbose_name='Rating')
+    ip = models.CharField(max_length=50, blank=True, verbose_name='Ip')
+    status = models.BooleanField(default=True, verbose_name='Status')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de creacion')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='Fecha de edicion')
+
+    def __str__(self):
+        return self.subject
+    
+    class Meta:
+        verbose_name_plural = 'Comentarios'

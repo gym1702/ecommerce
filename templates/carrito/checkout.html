@@ -11,68 +11,72 @@
         <div class="card">
 
           <div class="card-body">
-            <h4 class="card-title mb-4">Direccion de facturacion</h4>
+            <h4 class="card-title mb-4">Datos de quien recibe el pedido</h4>
 
-            <form action="{#% url 'lugar_orden' %}#" method="post">
+            {% if credit %}
+            <form action="{% url 'ordenes_app:place_order_credit' %}" method="post">
+            {% else %}
+            <form action="{% url 'ordenes_app:place_order' %}" method="post">
+            {% endif %}
 
               {% csrf_token %}
 
               <div class="form-row">
                 <div class="col form-group">
                   <label for="">Nombre(s)</label>
-                  <input type="text" name="nombre" class="form-control">
+                  <input type="text" name="first_name" class="form-control" required>
                 </div>
 
                 <div class="col form-group">
                   <label for="">Apellido(s)</label>
-                  <input type="text" name="apellido" class="form-control">
+                  <input type="text" name="last_name" class="form-control" required>
                 </div>
               </div>
 
               <div class="form-row">
                 <div class="col form-group">
                   <label for="">Email</label>
-                  <input type="email" name="email" class="form-control">
+                  <input type="email" name="email" class="form-control" required>
                 </div>
 
                 <div class="col form-group">
                   <label for="">Teléfono</label>
-                  <input type="text" name="telefono" class="form-control">
+                  <input type="text" name="phone" class="form-control" maxlength="10" required>
                 </div>
               </div>
 
               <div class="form-row">
                 <div class="col form-group">
                   <label for="">Calle y número</label>
-                  <input type="text" name="calle_no" class="form-control">
+                  <input type="text" name="addres_line_1" class="form-control" required>
                 </div>
 
                 <div class="col form-group">
                   <label for="">Colonia</label>
-                  <input type="text" name="colonia" class="form-control">
+                  <input type="text" name="addres_line_2" class="form-control" required>
                 </div>
               </div>
 
               <div class="form-row">
                 <div class="col form-group">
                   <label for="">Ciudad</label>
-                  <input type="text" name="ciudad" class="form-control">
+                  <input type="text" name="city" class="form-control" required>
                 </div>
 
                 <div class="col form-group">
                   <label for="">Estado</label>
-                  <input type="text" name="estado" class="form-control">
+                  <input type="text" name="state" class="form-control" required>
                 </div>
 
                 <div class="col form-group">
                   <label for="">Pais</label>
-                  <input type="text" name="pais" class="form-control">
+                  <input type="text" name="country" class="form-control" required>
                 </div>
               </div>
 
               <div class="form-row">
                 <label for="">Notas adicionales o referencias</label>
-                <textarea name="notas" class="form-control" rows="3" cols="80"></textarea>
+                <textarea name="order_note" class="form-control" rows="3" cols="80" required></textarea>
               </div>
           </div>
         </div>
@@ -133,8 +137,16 @@
               </tbody>
             </table>
 
-            <button type="submit" name="submit" class="btn btn-primary btn-block"> Ordenar productos</button>
-            <a href="{% url 'productos_app:productos' %}" class="btn btn-light btn-block">Continua comprando</a>
+            {% if credit %}
+              <button type="submit" name="submit" class="btn btn-outline-warning btn-block"> Ordenar productos a credito</button>
+              <br>
+              <!-- <button type="submit" name="submit" class="btn btn-outline-primary btn-block"> Ordenar productos de contado</button>            
+              <br> -->
+            {% else %}
+              <button type="submit" name="submit" class="btn btn-primary btn-block"> Ordenar productos</button>            
+            {% endif %}
+
+            <a href="{% url 'productos_app:productos' %}" class="btn btn-outline-success btn-block">Seguir comprando</a>
 
           </form>
 

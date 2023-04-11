@@ -11,6 +11,7 @@ urlpatterns = [
     re_path('', include('applications.cuentas.urls')),
     re_path('', include('applications.productos.urls')),
     re_path('', include('applications.carrito.urls')),
+    re_path('', include('applications.ordenes.urls')),
   
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

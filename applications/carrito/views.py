@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 
 from applications.productos.models import Producto, Variante
 from .models import Cart, CartItem
+from applications.cuentas.models import UserProfile
 
 
 #Funcuion que entrega la sesion del usuario actual
@@ -211,7 +212,7 @@ def cart(request, total=0, quantity=0, cart_items=None):
     try:
         #Carga carrito de compras para usuario en sesion
         if request.user.is_authenticated:
-            cart_items = CartItem.objects.filter(user = request.user, is_active = True)
+            cart_items = CartItem.objects.filter(user = request.user, is_active = True).order_by('id')
         else:
             #Carga carrito de compras para usuario que no esta en sesion
             cart = Cart.objects.get(cart_id = _cart_id(request))
@@ -252,12 +253,15 @@ def cart(request, total=0, quantity=0, cart_items=None):
 def checkout(request, total=0, quantity=0, cart_items=None):
     iva = 0
     subtotal = 0
+    credit = []
 
     #agrega los datos al template del carrito de compras
     try:
         #Carga carrito de compras para usuario en sesion
         if request.user.is_authenticated:
             cart_items = CartItem.objects.filter(user = request.user, is_active = True)
+            #para saber si el usuario tiene credito o no
+            credit = UserProfile.objects.get(user = request.user, credit=True)
         else:
             #Carga carrito de compras para usuario que no esta en sesion
             cart = Cart.objects.get(cart_id = _cart_id(request))
@@ -286,6 +290,7 @@ def checkout(request, total=0, quantity=0, cart_items=None):
         'iva': iva,
         'subtotal': subtotal,
         #'grantotal': grantotal,
+        'credit': credit
     }
 
 

@@ -35,7 +35,18 @@
 				<a href="{{ item.get_url }}" class="img-wrap"> <img src="{{ item.imagen.url }}"> </a>
 				<figcaption class="info-wrap">
 					<a href="{{ item.get_url }}" class="title">{{item.nombre}}</a>
-					<div class="price mt-1">${{item.precio}}</div> <!-- price-wrap.// -->
+					<div class="price mt-1">${{item.precio}}</div>	
+
+					<div class="rating-star">
+						<span>
+							<i class="fa fa-star{% if item.promedioReview < 0.5 %}-o{% elif item.promedioReview >= 0.5 and item.promedioReview < 1 %}-half-o {% endif %}" aria-hidden="true"></i>
+							<i class="fa fa-star{% if item.promedioReview < 1.5 %}-o{% elif item.promedioReview >= 1.5 and item.promedioReview < 2 %}-half-o {% endif %}" aria-hidden="true"></i>
+							<i class="fa fa-star{% if item.promedioReview < 2.5 %}-o{% elif item.promedioReview >= 2.5 and item.promedioReview < 3 %}-half-o {% endif %}" aria-hidden="true"></i>
+							<i class="fa fa-star{% if item.promedioReview < 3.5 %}-o{% elif item.promedioReview >= 3.5 and item.promedioReview < 4 %}-half-o {% endif %}" aria-hidden="true"></i>
+							<i class="fa fa-star{% if item.promedioReview < 4.5 %}-o{% elif item.promedioReview >= 4.5 and item.promedioReview < 5 %}-half-o {% endif %}" aria-hidden="true"></i>
+						</span>
+					</div>
+
 				</figcaption>
 			</div>
 		</div>	

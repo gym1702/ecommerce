@@ -2,11 +2,10 @@
     <!--   SIDEBAR   -->
     <ul class="list-group">
         <a class="list-group-item {% if '/cuentas/' == request.path %} active {% endif %}" href="{% url 'cuentas_app:dashboard' %}"> Dashboard </a>
-        <a class="list-group-item {% if '/mis_ordenes/' in request.path %} active {% endif %}" href="{#% url 'mis_ordenes' %#}"> Mis Ordenes </a>
-        <a class="list-group-item {% if '/editar_perfil/' in request.path %} active {% endif %}" href="{#% url 'editar_perfil' %#}"> Editar Perfil </a>
-        <a class="list-group-item {% if '/cambiar_password/' in request.path %} active {% endif %}" href="{#% url 'cambiar_password' %#}">Cambiar contraseña </a>
+        <a class="list-group-item {% if '/mis_ordenes/' in request.path %} active {% endif %}" href="{% url 'cuentas_app:mis_ordenes' %}"> Mis Ordenes </a>
+        <a class="list-group-item {% if '/editar_perfil/' in request.path %} active {% endif %}" href="{% url 'cuentas_app:editar_perfil' %}"> Editar Perfil </a>
+        <a class="list-group-item {% if '/cambiar_password/' in request.path %} active {% endif %}" href="{% url 'cuentas_app:change_password' %}">Cambiar contraseña </a>
     </ul>
     <br>
-    <a class="btn btn-light btn-block" href="{% url 'cuentas_app:logout' %}"> <i class="fa fa-power-off"></i> <span class="text">Cerrar sesión</span> </a>
-    <!--   SIDEBAR .//END   -->
+    <a class="btn btn-outline-dark btn-block" href="{% url 'cuentas_app:logout' %}"> <i class="fa fa-power-off"></i> <span class="text">Cerrar sesión</span> </a>
 </aside>
